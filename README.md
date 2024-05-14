@@ -72,17 +72,9 @@ You can use this query to get the list of books to display in your frontend. You
 
 - Use the "Mulish" Google font
 - You can use the following colors (You don't have to use all but you can pick and choose from here)
-  - Primary - Use this pallet for major elements
-    - Turquoise ![color swatch](data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20'><rect width='20' height='20' fill='%235ACCCC'/></svg>) #5ACCCC
-    - Steel Blue <span style="display: inline-block; width: 20px; height: 20px; background-color: #335C6E;"></span> #335C6E
-    - Yellow <span style="display: inline-block; width: 20px; height: 20px; background-color: #FABD33;"></span> #FABD33
-    - White <span style="display: inline-block; width: 20px; height: 20px; background-color: #FFFFFF;"></span> #FFFFFF
-  - Secondary - Use this pallet as accents
-    - Turquoise Light <span style="display: inline-block; width: 20px; height: 20px; background-color: #CFFAFA;"></span> #CFFAFA
-    - Turquoise dark 1 <span style="display: inline-block; width: 20px; height: 20px; background-color: #53C2C2;"></span> #53C2C2
-    - Orange Red <span style="display: inline-block; width: 20px; height: 20px; background-color: #F76434;"></span> #F76434
-    - Orange Pastel <span style="display: inline-block; width: 20px; height: 20px; background-color: #FFE6DC;"></span> #FFE6DC
-    - Yellow dark <span style="display: inline-block; width: 20px; height: 20px; background-color: #FAAD00;"></span> #FAAD00
+  <img width="1243" alt="Screenshot 2024-05-14 at 17 32 01" src="https://github.com/ElloTechnology/fullstack-take-home-test/assets/3518127/ae726f6e-bfc0-432a-b9d1-b06d1f6f6ead">
+
+<img width="1247" alt="Screenshot 2024-05-14 at 17 05 32" src="https://github.com/ElloTechnology/fullstack-take-home-test/assets/3518127/a8038609-9cca-405e-9a90-923197049597">
 
 ### You will be evaluated on
 
