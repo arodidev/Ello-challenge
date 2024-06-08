@@ -19,7 +19,7 @@
       }
     ],
     "paths": {
-      "@assets/*": ["./assets/*"]
+      "@mui/*": ["./node_modules/@mui/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
