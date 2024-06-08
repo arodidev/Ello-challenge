@@ -11,9 +11,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import FolderIcon from "@mui/icons-material/Folder";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { config } from "process";
 
 interface SearchBarProps {
   books: Array<Record<string, string>>;
@@ -60,10 +58,26 @@ interface readingListProps {
   >;
 }
 
+//TODO: ensure reading list can only be populated with one item at a time
+//reavamp file structure
+//enhance error handling for all components and fetch calls
+//change fetch to use SWR
+//add tests
+//add loading states
+//add empty states
+//misc: add dark mode
+
 const ReadingList: React.FC<readingListProps> = ({
   readingList,
   filterReadingList,
 }) => {
+  const handleDelete = (deletedItem: any) => {
+    const updatedReadingList = readingList.filter(
+      (itemsToFilter) => itemsToFilter.title !== deletedItem.title
+    );
+    filterReadingList(updatedReadingList);
+  };
+
   return (
     <div>
       <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
@@ -74,7 +88,11 @@ const ReadingList: React.FC<readingListProps> = ({
           return (
             <ListItem
               secondaryAction={
-                <IconButton edge="end" aria-label="delete">
+                <IconButton
+                  edge="end"
+                  aria-label="delete"
+                  onClick={() => handleDelete(eachItem)}
+                >
                   <DeleteIcon />
                 </IconButton>
               }
