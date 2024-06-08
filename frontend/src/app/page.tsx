@@ -1,41 +1,46 @@
 "use client";
 
-import React, { useState } from "react";
-import useBooksData from "./hooks/useBooksData";
+import React, { useEffect, useState } from "react";
+import useBooksData from "../hooks/useBooksData";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-import { styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import FolderIcon from "@mui/icons-material/Folder";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { config } from "process";
 
 interface SearchBarProps {
   books: Array<Record<string, string>>;
+  setReadingList: React.Dispatch<
+    React.SetStateAction<Record<string, string>[]>
+  >;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ books }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ books, setReadingList }) => {
+  const handleChange = (newValue: any) => {
+    const bookTitle = newValue.split(":")[0].trim();
+    const updatedBook = books?.find((book) => book.title == bookTitle);
+    if (updatedBook)
+      setReadingList((previousList: any[]) => [...previousList, updatedBook]); //will fix the any type here
+  };
+
   return (
     <Autocomplete
       freeSolo
       id="free-solo-2-demo"
       disableClearable
-      options={books.map((option) => `${option.title} by ${option.author}`)}
+      options={books.map((option) => `${option.title} : ${option.author}`)}
+      onChange={(event: any, newValue: string) => handleChange(newValue)}
       renderInput={(params) => (
         <TextField
           {...params}
-          label="Search input"
+          label="Select item to add to reading list"
           InputProps={{
             ...params.InputProps,
             type: "search",
@@ -46,58 +51,69 @@ const SearchBar: React.FC<SearchBarProps> = ({ books }) => {
   );
 };
 
-const ReadingList = () => {
-  const [readingList, setReadingList] = useState([]);
+const Search = () => {};
+interface readingListProps {
+  //integrate this interface with the other interface
+  readingList: Array<Record<string, string>>;
+  filterReadingList: React.Dispatch<
+    React.SetStateAction<Record<string, string>[]>
+  >;
+}
 
-  function generate(element: React.ReactElement) {
-    return [0, 1, 2, 3, 4, 5].map((value) =>
-      React.cloneElement(element, {
-        key: value,
-      })
-    );
-  }
-
+const ReadingList: React.FC<readingListProps> = ({
+  readingList,
+  filterReadingList,
+}) => {
   return (
     <div>
       <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
         Reading List
       </Typography>
       <List dense={false}>
-        {generate(
-          <ListItem
-            secondaryAction={
-              <IconButton edge="end" aria-label="delete">
-                <DeleteIcon />
-              </IconButton>
-            }
-          >
-            <ListItemAvatar>
-              <Avatar>
-                <FolderIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText
-              primary="Single-line item"
-              secondary={"Secondary text"}
-            />
-          </ListItem>
-        )}
+        {readingList.map((eachItem) => {
+          return (
+            <ListItem
+              secondaryAction={
+                <IconButton edge="end" aria-label="delete">
+                  <DeleteIcon />
+                </IconButton>
+              }
+            >
+              <ListItemAvatar>
+                <Avatar>
+                  <img src={`./${eachItem.coverPhotoURL}`} alt="" />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText
+                primary={eachItem.title}
+                secondary={`by ${eachItem.author}`}
+              />
+            </ListItem>
+          );
+        })}
       </List>
     </div>
   );
 };
 
 export default function Home() {
+  const [readingList, setReadingList] = useState<Array<Record<string, string>>>( //should adjust this to a set to disallow multiple values in the set, or set a validator for duplicate values, or create a dedup function
+    []
+  );
   const { data, isLoading, error } = useBooksData();
 
   if (isLoading) return <h1>Loading data...</h1>;
+
   return (
     <div>
       <div style={{ margin: "20px" }}>
-        <SearchBar books={data} />
+        <SearchBar books={data} setReadingList={setReadingList} />
       </div>
       <div>
-        <ReadingList />
+        <ReadingList
+          readingList={readingList}
+          filterReadingList={setReadingList}
+        />
       </div>
     </div>
   );
