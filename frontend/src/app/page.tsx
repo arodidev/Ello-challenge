@@ -1,36 +1,34 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import useBooksData from "./hooks/useBooksData";
 
 export default function Home() {
-  const [bookData, setBookData] = useState();
+  const { data, isLoading, error } = useBooksData();
 
-  // useEffect(() => {
-  const url = new URL("http://localhost:4000/books");
+  console.log({ data: data, isLoading: isLoading, error: error });
 
-  const query = `query { books {
-      author, coverPhotoURL, title, __typename
-    }}`;
-
-  const params = { query: query };
-
-  url.search = new URLSearchParams(params).toString();
-
-  fetch(url, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-  })
-    .then((res) => res.json())
-    .then((data) => console.log(data.data.books))
-    .catch((error) => console.log(error));
-  // }, []);
-
+  if (isLoading) return <h1>Loading data...</h1>;
   return (
     <>
-      <h1>Hey there</h1> <h5>New Ello project has c ha nged again</h5>
+      {data?.map((eachEntry, index) => {
+        const { author, coverPhotoURL, title } = eachEntry;
+
+        return (
+          <>
+            <h3>Title number {index}</h3>
+            <ul>
+              <li>author: {author}</li>
+              <li>title: {title}</li>
+            </ul>
+            <img
+              src={`./${coverPhotoURL}`}
+              alt="my book image"
+              width="50px"
+              height="20px"
+            />
+          </>
+        );
+      })}
     </>
   );
 }
