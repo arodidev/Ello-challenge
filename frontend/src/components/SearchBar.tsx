@@ -30,30 +30,32 @@ const SearchBar: React.FC<SearchBarProps> = ({
   };
 
   return (
-    <>
-      <Autocomplete
-        freeSolo
-        id="free-solo-2-demo"
-        disableClearable
-        options={books.map((option) => `${option.title} : ${option.author}`)}
-        onChange={(event: any, newValue: string) => handleChange(newValue)}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label="Select item to add to reading list"
-            InputProps={{
-              ...params.InputProps,
-              type: "search",
-            }}
-          />
-        )}
-      />
-      <InfoSnackBar
-        showSnackBar={showSnackBar}
-        setShowSnackBar={setShowSnackBar}
-        message="This book already exists on the reading list!"
-      />
-    </>
+    <div className="mt-10 h-14 flex justify-center">
+      <div className="flex-grow max-w-xl">
+        <Autocomplete
+          freeSolo
+          id="free-solo-2-demo"
+          disableClearable
+          options={books.map((option) => `${option.title} : ${option.author}`)}
+          onChange={(event: any, newValue: string) => handleChange(newValue)}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Select item to add to reading list"
+              InputProps={{
+                ...params.InputProps,
+                type: "search",
+              }}
+            />
+          )}
+        />
+        <InfoSnackBar
+          showSnackBar={showSnackBar}
+          setShowSnackBar={setShowSnackBar}
+          message="This book already exists on the reading list!"
+        />
+      </div>
+    </div>
   );
 };
 
