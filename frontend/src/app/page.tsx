@@ -2,16 +2,14 @@
 
 import React, { useState } from "react";
 import useBooksData from "../hooks/useBooksData";
-import SearchBar from "src/components/Content/SearchBar";
-import ReadingList from "src/components/Content/ReadingList";
 import LoadingSpinner from "src/components/page-utils/LoadingSpinner";
 import Header from "src/components/Layout/Header";
 import Footer from "src/components/Layout/Footer";
 import Content from "src/components/Content/Content";
 
-//revamp UI: WIP
-//change font
-//TODO: ensure reading list can only be populated with one item at a time/ use a Set
+//revamp UI: Done
+//change font (still need to check how to apply it fully)
+//TODO: ensure reading list can only be populated with one item at a time/ use a Set ()
 //enhance error handling for all components and fetch calls
 //change fetch to use SWR
 //add tests

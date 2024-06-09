@@ -21,8 +21,13 @@ const ReadingList: React.FC<readingListProps> = ({
   filterReadingList,
 }) => {
   const handleDelete = (deletedItem: any) => {
+    //add type checking here
     const updatedReadingList = readingList.filter(
-      (itemsToFilter) => itemsToFilter.title !== deletedItem.title
+      (itemsToFilter) =>
+        !(
+          itemsToFilter.title == deletedItem.title &&
+          itemsToFilter.author == deletedItem.author
+        )
     );
     filterReadingList(updatedReadingList);
   };
@@ -30,7 +35,10 @@ const ReadingList: React.FC<readingListProps> = ({
   return (
     <div className="mt-10 flex justify-center">
       <div className="px-2 py-2 flex-grow max-w-6xl border-2 border-secondary rounded-2xl">
-        <div className="readingListHeader"> Reading List</div>
+        <div className="readingListHeader text-primary text-lg underline mx-4">
+          {" "}
+          Reading List
+        </div>
         <List dense={false}>
           {readingList.map((eachItem) => {
             return (

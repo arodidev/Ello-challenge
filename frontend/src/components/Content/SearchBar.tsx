@@ -18,10 +18,19 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const [showSnackBar, setShowSnackBar] = useState<boolean>(false);
 
   const handleChange = (newValue: any) => {
-    const bookTitle = newValue.split(":")[0].trim();
-    const updatedBook = books?.find((book) => book.title == bookTitle);
+    const [bookTitle, author] = newValue.split(":");
+
+    const updatedBook = books?.find(
+      (book) => book.title == bookTitle.trim() && book.author == author.trim()
+    );
+
     if (updatedBook) {
-      if (readingList.find((item) => item.title === updatedBook.title)) {
+      if (
+        readingList.find(
+          (item) =>
+            item.title == updatedBook.title && item.author == updatedBook.author
+        )
+      ) {
         setShowSnackBar(true);
         return;
       }
