@@ -10,7 +10,7 @@ const LoadingSpinner = () => {
         height: "100vh",
       }}
     >
-      <ClipLoader color="#335C6E" loading size={100} speedMultiplier={1} />
+      <ClipLoader color="#5ACCCC" loading size={100} speedMultiplier={1} />
     </div>
   );
 };

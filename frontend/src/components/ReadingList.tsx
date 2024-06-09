@@ -28,10 +28,8 @@ const ReadingList: React.FC<readingListProps> = ({
   };
 
   return (
-    <div>
-      <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-        Reading List
-      </Typography>
+    <div className="px-2 py-2 flex-grow max-w-6xl border-2 border-secondary rounded-2xl">
+      <div className="readingListHeader"> Reading List</div>
       <List dense={false}>
         {readingList.map((eachItem) => {
           return (
@@ -48,7 +46,7 @@ const ReadingList: React.FC<readingListProps> = ({
             >
               <ListItemAvatar>
                 <Avatar>
-                  <img src={`./${eachItem.coverPhotoURL}`} alt="" />
+                  <img src={`./${eachItem.coverPhotoURL}`} alt="avatar icon" />
                 </Avatar>
               </ListItemAvatar>
               <ListItemText
