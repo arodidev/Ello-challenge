@@ -2,9 +2,12 @@
 
 import React, { useState } from "react";
 import useBooksData from "../hooks/useBooksData";
-import SearchBar from "src/components/SearchBar";
-import ReadingList from "src/components/ReadingList";
+import SearchBar from "src/components/Content/SearchBar";
+import ReadingList from "src/components/Content/ReadingList";
 import LoadingSpinner from "src/components/page-utils/LoadingSpinner";
+import Header from "src/components/Layout/Header";
+import Footer from "src/components/Layout/Footer";
+import Content from "src/components/Content/Content";
 
 //revamp UI: WIP
 //change font
@@ -17,73 +20,11 @@ import LoadingSpinner from "src/components/page-utils/LoadingSpinner";
 //misc: add dark mode
 //rename files especially root component
 
-const Header = () => {
-  return (
-    <div>
-      <header className="bg-secondary text-white px-8 py-4 shadow-lg">
-        <div className=" mx-auto flex justify-between items-center">
-          <div>
-            <img
-              src="https://github.com/ElloTechnology/backend_takehome/assets/3518127/561bc8d4-bffc-4360-b9ea-61e876bcec93"
-              alt="logo"
-              width="70px"
-              height="70px"
-            />
-          </div>
-        </div>
-      </header>
-    </div>
-  );
-};
-
-const Footer = () => {
-  return (
-    <div className="footer sticky bottom-0 w-full">
-      <footer className="bg-secondary text-white py-4">
-        <div className="container mx-auto text-center">
-          <div className="text-accent">
-            &copy; Crafted by{" "}
-            <a href="https://github.com/arodidev" target="_blank">
-              <span className="text-primary">Jamie Arodi.</span>
-            </a>
-          </div>
-        </div>
-      </footer>
-    </div>
-  );
-};
-
-interface ContentProps {
-  data: Array<Record<string, string>>;
-  readingList: Array<Record<string, string>>;
-  setReadingList: React.Dispatch<
-    React.SetStateAction<Record<string, string>[]>
-  >;
-}
-const Content: React.FC<ContentProps> = ({
-  data,
-  readingList,
-  setReadingList,
-}) => {
-  return (
-    <div className="page-content flex-grow mx-8 my-4">
-      <SearchBar
-        books={data}
-        readingList={readingList}
-        setReadingList={setReadingList}
-      />
-      <ReadingList
-        readingList={readingList}
-        filterReadingList={setReadingList}
-      />
-    </div>
-  );
-};
-
 export default function BookAssignmentView() {
   const [readingList, setReadingList] = useState<Array<Record<string, string>>>( //should adjust this to a set to disallow multiple values in the set, or set a validator for duplicate values, or create a dedup function
     []
   );
+
   const { data, isLoading, error } = useBooksData();
 
   if (isLoading) return <LoadingSpinner />;

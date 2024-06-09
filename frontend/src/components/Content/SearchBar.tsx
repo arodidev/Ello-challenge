@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Autocomplete, TextField } from "@mui/material";
-import InfoSnackBar from "../components/page-utils/InfoSnackBar";
+import InfoSnackBar from "../page-utils/InfoSnackBar";
 
 interface SearchBarProps {
   books: Array<Record<string, string>>;
