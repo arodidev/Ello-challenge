@@ -6,8 +6,8 @@ import SearchBar from "src/components/SearchBar";
 import ReadingList from "src/components/ReadingList";
 import LoadingSpinner from "src/components/page-utils/LoadingSpinner";
 
-//TODO: ensure reading list can only be populated with one item at a time
-//reavamp file structure
+//revamp UI: WIP
+//TODO: ensure reading list can only be populated with one item at a time/ use a Set
 //enhance error handling for all components and fetch calls
 //change fetch to use SWR
 //add tests
@@ -27,7 +27,11 @@ export default function BookAssignmentView() {
   return (
     <div>
       <div style={{ margin: "20px" }}>
-        <SearchBar books={data} setReadingList={setReadingList} />
+        <SearchBar
+          books={data}
+          readingList={readingList}
+          setReadingList={setReadingList}
+        />
       </div>
       <div>
         <ReadingList
