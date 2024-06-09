@@ -8,6 +8,7 @@ import {
   ListItemText,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import EmptyState from "../page-utils/EmptyState";
 
 interface readingListProps {
   readingList: Array<Record<string, string>>;
@@ -15,17 +16,6 @@ interface readingListProps {
     React.SetStateAction<Record<string, string>[]>
   >;
 }
-
-const EmptyState = () => {
-  return (
-    <div className="readingListHeader flex text-emptyState text-2xl mx-4 justify-center">
-      <p>
-        Your reading list is empty. Please select items from the search box
-        above.
-      </p>
-    </div>
-  );
-};
 
 const ReadingList: React.FC<readingListProps> = ({
   readingList,
