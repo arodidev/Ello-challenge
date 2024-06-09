@@ -6,6 +6,8 @@ import LoadingSpinner from "src/components/page-utils/LoadingSpinner";
 import Header from "src/components/Layout/Header";
 import Footer from "src/components/Layout/Footer";
 import Content from "src/components/Content/Content";
+import { ThemeProvider } from "@mui/system";
+import theme from "src/themeProvider";
 
 //revamp UI: Done
 //change font (still need to check how to apply it fully)
@@ -28,14 +30,16 @@ export default function BookAssignmentView() {
   if (isLoading) return <LoadingSpinner />;
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
-      <Content
-        data={data}
-        readingList={readingList}
-        setReadingList={setReadingList}
-      />
-      <Footer />
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className="min-h-screen flex flex-col">
+        <Header />
+        <Content
+          data={data}
+          readingList={readingList}
+          setReadingList={setReadingList}
+        />
+        <Footer />
+      </div>
+    </ThemeProvider>
   );
 }

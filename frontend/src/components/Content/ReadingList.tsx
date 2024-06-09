@@ -16,6 +16,14 @@ interface readingListProps {
   >;
 }
 
+const EmptyState = () => {
+  return (
+    <div className="readingListHeader flex text-emptyState text-2xl mx-4 justify-center">
+      <p>Reading list is empty, please select from the searchbox above.</p>
+    </div>
+  );
+};
+
 const ReadingList: React.FC<readingListProps> = ({
   readingList,
   filterReadingList,
@@ -35,40 +43,46 @@ const ReadingList: React.FC<readingListProps> = ({
   return (
     <div className="mt-10 flex justify-center">
       <div className="px-2 py-2 flex-grow max-w-6xl border-2 border-secondary rounded-2xl">
-        <div className="readingListHeader text-primary text-lg underline mx-4">
-          {" "}
-          Reading List
-        </div>
-        <List dense={false}>
-          {readingList.map((eachItem) => {
-            return (
-              <ListItem
-                secondaryAction={
-                  <IconButton
-                    edge="end"
-                    aria-label="delete"
-                    onClick={() => handleDelete(eachItem)}
+        {!readingList?.length ? (
+          <EmptyState />
+        ) : (
+          <div className="readingListContent flex-grow">
+            <div className="readingListHeader text-primary text-lg underline mx-4">
+              {" "}
+              Reading List
+            </div>
+            <List dense={false}>
+              {readingList.map((eachItem) => {
+                return (
+                  <ListItem
+                    secondaryAction={
+                      <IconButton
+                        edge="end"
+                        aria-label="delete"
+                        onClick={() => handleDelete(eachItem)}
+                      >
+                        <DeleteIcon />
+                      </IconButton>
+                    }
                   >
-                    <DeleteIcon />
-                  </IconButton>
-                }
-              >
-                <ListItemAvatar>
-                  <Avatar>
-                    <img
-                      src={`./${eachItem.coverPhotoURL}`}
-                      alt="avatar icon"
+                    <ListItemAvatar>
+                      <Avatar>
+                        <img
+                          src={`./${eachItem.coverPhotoURL}`}
+                          alt="avatar icon"
+                        />
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={eachItem.title}
+                      secondary={`by ${eachItem.author}`}
                     />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText
-                  primary={eachItem.title}
-                  secondary={`by ${eachItem.author}`}
-                />
-              </ListItem>
-            );
-          })}
-        </List>
+                  </ListItem>
+                );
+              })}
+            </List>
+          </div>
+        )}
       </div>
     </div>
   );

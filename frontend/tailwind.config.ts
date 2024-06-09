@@ -14,6 +14,10 @@ const config: Config = {
         secondary: "#335C6E",
         accent: "#FABD33",
         customColor: "#ff5722",
+        emptyState: "#F76434",
+      },
+      fontFamily: {
+        mulish: ["Mulish", "sans-serif"],
       },
     },
   },
