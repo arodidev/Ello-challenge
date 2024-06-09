@@ -1,13 +1,13 @@
+import { Book } from "src/types";
 import ReadingList from "./ReadingList";
 import SearchBar from "./SearchBar";
 
 interface ContentProps {
-  data: Array<Record<string, string>>;
-  readingList: Array<Record<string, string>>;
-  setReadingList: React.Dispatch<
-    React.SetStateAction<Record<string, string>[]>
-  >;
+  data: Book[];
+  readingList: Book[];
+  setReadingList: React.Dispatch<React.SetStateAction<Book[]>>;
 }
+
 const Content: React.FC<ContentProps> = ({
   data,
   readingList,
@@ -20,10 +20,7 @@ const Content: React.FC<ContentProps> = ({
         readingList={readingList}
         setReadingList={setReadingList}
       />
-      <ReadingList
-        readingList={readingList}
-        filterReadingList={setReadingList}
-      />
+      <ReadingList readingList={readingList} setReadingList={setReadingList} />
     </div>
   );
 };

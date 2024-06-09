@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { Autocomplete, TextField } from "@mui/material";
 import InfoSnackBar from "../page-utils/InfoSnackBar";
+import { Book } from "src/types";
+import { findBookByTitleAndAuthor } from "src/helpers";
 
 interface SearchBarProps {
-  books: Array<Record<string, string>>;
-  readingList: Array<Record<string, string>>;
-  setReadingList: React.Dispatch<
-    React.SetStateAction<Record<string, string>[]>
-  >;
+  books: Book[];
+  readingList: Book[];
+  setReadingList: React.Dispatch<React.SetStateAction<Book[]>>;
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({
@@ -17,24 +17,30 @@ const SearchBar: React.FC<SearchBarProps> = ({
 }) => {
   const [showSnackBar, setShowSnackBar] = useState<boolean>(false);
 
-  const handleChange = (newValue: any) => {
+  const handleChange = (newValue: string) => {
     const [bookTitle, author] = newValue.split(":");
 
-    const updatedBook = books?.find(
-      (book) => book.title == bookTitle.trim() && book.author == author.trim()
+    const selectedBookTitle = bookTitle.trim();
+    const selectedBookAuthor = author.trim();
+
+    const updatedBook = findBookByTitleAndAuthor(
+      books,
+      selectedBookTitle,
+      selectedBookAuthor
     );
 
     if (updatedBook) {
       if (
-        readingList.find(
-          (item) =>
-            item.title == updatedBook.title && item.author == updatedBook.author
+        findBookByTitleAndAuthor(
+          readingList,
+          updatedBook.title,
+          updatedBook.author
         )
       ) {
         setShowSnackBar(true);
         return;
       }
-      setReadingList((previousList: any[]) => [...previousList, updatedBook]); //will fix the any type here
+      setReadingList((previousList: Book[]) => [...previousList, updatedBook]);
     }
   };
 
@@ -46,7 +52,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
           id="free-solo-2-demo"
           disableClearable
           options={books.map((option) => `${option.title} : ${option.author}`)}
-          onChange={(event: any, newValue: string) => handleChange(newValue)}
+          onChange={(event, newValue: string) => handleChange(newValue)}
           renderInput={(params) => (
             <TextField
               {...params}

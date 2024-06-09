@@ -1,5 +1,4 @@
 import {
-  Typography,
   List,
   ListItem,
   IconButton,
@@ -9,28 +8,21 @@ import {
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EmptyState from "../page-utils/EmptyState";
+import { Book } from "src/types";
+import { updateReadingList } from "src/helpers";
 
 interface readingListProps {
-  readingList: Array<Record<string, string>>;
-  filterReadingList: React.Dispatch<
-    React.SetStateAction<Record<string, string>[]>
-  >;
+  readingList: Book[];
+  setReadingList: React.Dispatch<React.SetStateAction<Book[]>>;
 }
 
 const ReadingList: React.FC<readingListProps> = ({
   readingList,
-  filterReadingList,
+  setReadingList,
 }) => {
-  const handleDelete = (deletedItem: any) => {
-    //add type checking here
-    const updatedReadingList = readingList.filter(
-      (itemsToFilter) =>
-        !(
-          itemsToFilter.title == deletedItem.title &&
-          itemsToFilter.author == deletedItem.author
-        )
-    );
-    filterReadingList(updatedReadingList);
+  const handleDelete = (deletedItem: Book) => {
+    const updatedReadingList = updateReadingList(readingList, deletedItem);
+    setReadingList(updatedReadingList);
   };
 
   return (
