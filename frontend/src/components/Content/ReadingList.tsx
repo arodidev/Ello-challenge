@@ -19,7 +19,10 @@ interface readingListProps {
 const EmptyState = () => {
   return (
     <div className="readingListHeader flex text-emptyState text-2xl mx-4 justify-center">
-      <p>Reading list is empty, please select from the searchbox above.</p>
+      <p>
+        Your reading list is empty. Please select items from the search box
+        above.
+      </p>
     </div>
   );
 };

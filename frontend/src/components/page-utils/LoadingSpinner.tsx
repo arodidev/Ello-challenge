@@ -1,4 +1,4 @@
-import { ClipLoader, HashLoader } from "react-spinners";
+import { BeatLoader } from "react-spinners";
 
 const LoadingSpinner = () => {
   return (
@@ -10,7 +10,7 @@ const LoadingSpinner = () => {
         height: "100vh",
       }}
     >
-      <ClipLoader color="#5ACCCC" loading size={100} speedMultiplier={1} />
+      <BeatLoader color="#5ACCCC" loading size={20} speedMultiplier={1} />
     </div>
   );
 };

@@ -1,45 +1,24 @@
 "use client";
 
-import React, { useState } from "react";
-import useBooksData from "../hooks/useBooksData";
-import LoadingSpinner from "src/components/page-utils/LoadingSpinner";
-import Header from "src/components/Layout/Header";
-import Footer from "src/components/Layout/Footer";
-import Content from "src/components/Content/Content";
+import React from "react";
+import BookAssignmentView from "../components/BookAssignmentView";
 import { ThemeProvider } from "@mui/system";
 import theme from "src/themeProvider";
 
 //revamp UI: Done
-//change font (still need to check how to apply it fully)
-//TODO: ensure reading list can only be populated with one item at a time/ use a Set ()
-//enhance error handling for all components and fetch calls
+//change font: Done
+//TODO: ensure reading list can only be populated with one item at a time: Done
+//enhance error handling for all components and fetch calls TO:DO
 //change fetch to use SWR
 //add tests
-//add loading states
-//add empty states
-//misc: add dark mode
+//add loading states: Done
+//add empty states: Done
 //rename files especially root component
 
-export default function BookAssignmentView() {
-  const [readingList, setReadingList] = useState<Array<Record<string, string>>>( //should adjust this to a set to disallow multiple values in the set, or set a validator for duplicate values, or create a dedup function
-    []
-  );
-
-  const { data, isLoading, error } = useBooksData();
-
-  if (isLoading) return <LoadingSpinner />;
-
+export default function App() {
   return (
     <ThemeProvider theme={theme}>
-      <div className="min-h-screen flex flex-col">
-        <Header />
-        <Content
-          data={data}
-          readingList={readingList}
-          setReadingList={setReadingList}
-        />
-        <Footer />
-      </div>
+      <BookAssignmentView />;
     </ThemeProvider>
   );
 }
