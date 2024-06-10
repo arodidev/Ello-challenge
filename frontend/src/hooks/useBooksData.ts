@@ -1,31 +1,22 @@
 "use client";
 
 import { useState, useEffect } from "react";
+//will refactor for SWR
+import { fetcher } from "src/api";
+import { query } from "src/api";
+import { Book } from "src/types";
 
 const useBooksData = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<Book[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<Error[] | null>(null); //TBD whether null or undefined
 
   const url = new URL("http://localhost:4000/books");
-
-  const query = `query { books {
-      author, coverPhotoURL, title, __typename
-    }}`;
-
   const params = { query: query };
-
-  url.search = new URLSearchParams(params).toString();
+  url.search = new URLSearchParams(params).toString(); //might revamp this to use conventional GraphQl fetching(refer to SWR docs)
 
   useEffect(() => {
-    fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
-      .then((res) => res.json())
+    fetcher(url)
       .then((data) => setData(data?.data?.books))
       .catch((error) => setError(error))
       .finally(() => setIsLoading(false));
