@@ -51,7 +51,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
           freeSolo
           id="free-solo-2-demo"
           disableClearable
-          options={books.map((option) => `${option.title} : ${option.author}`)}
+          options={books?.map((option) => `${option.title} : ${option.author}`)}
           onChange={(event, newValue: string) => handleChange(newValue)}
           renderInput={(params) => (
             <TextField
