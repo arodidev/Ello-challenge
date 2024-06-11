@@ -13,6 +13,8 @@ function BookAssignmentView() {
 
   const { data, isLoading, error } = useBooksData();
 
+  if (error) console.error(error);
+
   if (isLoading) return <LoadingSpinner />;
 
   return (
