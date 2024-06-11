@@ -48,7 +48,6 @@ const SearchBar: React.FC<SearchBarProps> = ({
     <div className="mt-10 h-14 flex justify-center">
       <div className="flex-grow max-w-xl">
         <Autocomplete
-          freeSolo
           id="free-solo-2-demo"
           disableClearable
           options={books?.map((option) => `${option.title} : ${option.author}`)}
