@@ -2,7 +2,21 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, install dependencies:
+To get access to data that you will use for this challenge you can switch into the `src/backend` folder and run
+
+```bash
+npm install
+```
+
+Then run the following command to start the server
+
+```bash
+npm start
+```
+
+This start a Graphql server at the url `http://localhost:4000/`, the server has a single query `books` that returns a list of books.
+
+Then navigate to the `src/frontend` directory and install dependencies:
 
 ```bash
 npm install
